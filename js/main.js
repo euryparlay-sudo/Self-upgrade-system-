@@ -8,7 +8,6 @@ import { GameService } from './services/GameService.js';
 import { QuestService } from './services/QuestService.js';
 import { Dashboard } from './ui/Dashboard.js';
 import { QuestUI } from './ui/QuestUI.js';
-import { StatsUI } from './ui/StatsUI.js';
 import { AchievementUI } from './ui/AchievementUI.js';
 import { defaultQuests } from '../data/defaultQuests.js';
 
@@ -43,32 +42,6 @@ function wireUI() {
     }
 
     renderAll();
-  };
-
-  // Quest remove
-  QuestUI.onRemove = (questId) => {
-    const result = QuestService.removeQuest(player, questId);
-    if (result.success) {
-      StorageService.save(player);
-      renderAll();
-    }
-  };
-
-  // Quest add
-  QuestUI.onAdd = (questData) => {
-    if (!questData.title) {
-      showNotification('Please enter a quest title.', 'error');
-      return;
-    }
-    const result = QuestService.addQuest(player, questData);
-    if (result.success) {
-      StorageService.save(player);
-      QuestUI.resetForm();
-      renderAll();
-      showNotification('Quest added!', 'success');
-    } else {
-      showNotification(result.message, 'error');
-    }
   };
 
   // Reset game button
@@ -107,8 +80,6 @@ function wireUI() {
 function renderAll() {
   Dashboard.render(player);
   QuestUI.render(player);
-  StatsUI.render(player);
-  AchievementUI.render(player);
 }
 
 // ── Notifications ────────────────────────────────────────────

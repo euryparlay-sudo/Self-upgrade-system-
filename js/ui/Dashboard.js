@@ -28,14 +28,38 @@ export const Dashboard = {
 
     const fillEl = document.getElementById('exp-bar-fill');
     const labelEl = document.getElementById('exp-label');
+    const trackEl = fillEl?.parentElement;
     if (fillEl) fillEl.style.width = `${pct}%`;
     if (labelEl) labelEl.textContent = `${player.exp} / ${needed} EXP`;
+    if (trackEl) trackEl.setAttribute('aria-valuenow', pct);
   },
 
   _renderStreak(player) {
     const streakEl = document.getElementById('streak-value');
-    const bestEl = document.getElementById('streak-best');
-    if (streakEl) streakEl.textContent = `🔥 ${player.streak.current}-day streak`;
-    if (bestEl) bestEl.textContent = `Best: ${player.streak.best}`;
+    const lastLoginEl = document.getElementById('streak-last-login');
+
+    if (streakEl) {
+      streakEl.textContent = `🔥 ${player.streak.current}-day streak`;
+    }
+
+    if (lastLoginEl) {
+      const lastDate = player.streak.lastCompletionDate;
+      if (!lastDate) {
+        lastLoginEl.textContent = 'Last login: —';
+      } else {
+        const MS_PER_DAY = 86400000;
+        const today = new Date().toISOString().slice(0, 10);
+        const yesterday = new Date(Date.now() - MS_PER_DAY).toISOString().slice(0, 10);
+        let label;
+        if (lastDate === today) {
+          label = 'Today';
+        } else if (lastDate === yesterday) {
+          label = 'Yesterday';
+        } else {
+          label = new Date(lastDate).toLocaleDateString();
+        }
+        lastLoginEl.textContent = `Last login: ${label}`;
+      }
+    }
   },
 };

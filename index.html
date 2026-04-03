@@ -28,7 +28,7 @@
 
   <main class="dashboard-grid">
 
-    <!-- ── Player hero card ── -->
+    <!-- ── Player info card ── -->
     <section class="card player-card" aria-label="Player overview">
       <div class="player-card__meta">
         <h1 id="player-name">Hero</h1>
@@ -41,107 +41,25 @@
         </div>
         <span id="exp-label">0 / 100 EXP</span>
       </div>
-
-      <div class="streak-row">
-        <span id="streak-value">🔥 0-day streak</span>
-        <span id="streak-best">Best: 0</span>
-      </div>
     </section>
 
-    <!-- ── Stats card ── -->
-    <section class="card" aria-label="Player stats">
-      <h2 class="card__title"><span class="card__title-icon">📊</span> Stats</h2>
-
-      <div class="stat-row">
-
-        <div class="stat-item">
-          <div class="stat-label-row">
-            <span class="stat-name">💪 Physical</span>
-            <span class="stat-value" id="stat-physical-value">0</span>
-          </div>
-          <div class="stat-track">
-            <div class="stat-bar stat-bar--physical" id="stat-physical-bar"></div>
-          </div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-label-row">
-            <span class="stat-name">🧠 Mind</span>
-            <span class="stat-value" id="stat-mind-value">0</span>
-          </div>
-          <div class="stat-track">
-            <div class="stat-bar stat-bar--mind" id="stat-mind-bar"></div>
-          </div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-label-row">
-            <span class="stat-name">🎯 Focus</span>
-            <span class="stat-value" id="stat-focus-value">0</span>
-          </div>
-          <div class="stat-track">
-            <div class="stat-bar stat-bar--focus" id="stat-focus-bar"></div>
-          </div>
-        </div>
-
+    <!-- ── Streak card ── -->
+    <section class="card streak-card" aria-label="Streak">
+      <h2 class="card__title"><span class="card__title-icon">🔥</span> Streak</h2>
+      <div class="streak-info">
+        <span id="streak-value" class="streak-current">0-day streak</span>
+        <span id="streak-last-login" class="streak-date">Last login: —</span>
       </div>
     </section>
 
     <!-- ── Quests card ── -->
-    <section class="card quest-section" aria-label="Quests">
+    <section class="card quest-section" aria-label="Today's Quests">
       <h2 class="card__title">
-        <span class="card__title-icon">📋</span> Quests
-        <span class="quest-counter" id="quest-counter">0 / 5 quests</span>
+        <span class="card__title-icon">📋</span> Today's Quests
       </h2>
 
       <div id="quest-list" role="list" aria-label="Quest list">
         <!-- Populated by QuestUI.js -->
-      </div>
-
-      <!-- Add quest form -->
-      <form id="add-quest-form" class="add-quest-form" novalidate>
-        <h3>+ Add New Quest</h3>
-
-        <div class="form-group">
-          <label for="quest-title">Title <span aria-hidden="true">*</span></label>
-          <input id="quest-title" type="text" maxlength="80" placeholder="e.g. Morning Workout" required />
-        </div>
-
-        <div class="form-group">
-          <label for="quest-description">Description</label>
-          <textarea id="quest-description" rows="2" maxlength="200" placeholder="Optional details…"></textarea>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="quest-type">Type</label>
-            <select id="quest-type">
-              <option value="normal">🟢 Normal</option>
-              <option value="hard">🔵 Hard</option>
-              <option value="legend">🟣 Legend</option>
-              <option value="custom">🎯 Custom</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="quest-category">Category</label>
-            <select id="quest-category">
-              <option value="physical">💪 Physical</option>
-              <option value="mind">🧠 Mind</option>
-              <option value="focus">🎯 Focus</option>
-            </select>
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn--primary">Add Quest</button>
-      </form>
-    </section>
-
-    <!-- ── Achievements card ── -->
-    <section class="card achievement-section" aria-label="Achievements">
-      <h2 class="card__title"><span class="card__title-icon">🏆</span> Achievements</h2>
-      <div id="achievement-list" role="list" aria-label="Achievement list">
-        <!-- Populated by AchievementUI.js -->
       </div>
     </section>
 

@@ -4,7 +4,7 @@
 
 /* ── Layout ─────────────────────────────────────────────────── */
 .app-wrapper {
-  max-width: 1100px;
+  max-width: 680px;
   margin: 0 auto;
   padding: var(--space-6) var(--space-4);
 }
@@ -33,17 +33,11 @@
 .name-edit { display: flex; gap: var(--space-2); align-items: center; }
 .name-edit input { width: 140px; }
 
-/* Grid layout */
+/* Single-column grid — 3 sections stacked */
 .dashboard-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-6);
-}
-
-/* Make quest section span full width on smaller grids */
-@media (max-width: 768px) {
-  .dashboard-grid { grid-template-columns: 1fr; }
 }
 
 /* ── Glass card ─────────────────────────────────────────────── */
@@ -71,7 +65,6 @@
 
 /* ── Player header card ─────────────────────────────────────── */
 .player-card {
-  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -128,92 +121,29 @@
   text-align: right;
 }
 
-/* Streak */
-.streak-row {
+/* ── Streak card ────────────────────────────────────────────── */
+.streak-info {
   display: flex;
-  gap: var(--space-5);
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
-#streak-value {
+.streak-current {
   font-size: var(--font-size-lg);
   font-weight: 700;
   color: var(--color-accent);
 }
 
-#streak-best {
+.streak-date {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
-
-/* ── Stats card ─────────────────────────────────────────────── */
-.stat-row {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.stat-label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.stat-name {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-text-muted);
-}
-
-.stat-value {
-  font-size: var(--font-size-sm);
-  font-weight: 700;
-  color: var(--color-text);
-}
-
-.stat-track {
-  height: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-}
-
-.stat-bar {
-  height: 100%;
-  border-radius: var(--radius-full);
-  width: 0%;
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.stat-bar--physical { background: var(--gradient-physical); box-shadow: 0 0 6px rgba(239,68,68,0.4); }
-.stat-bar--mind     { background: var(--gradient-mind);     box-shadow: 0 0 6px rgba(139,92,246,0.4); }
-.stat-bar--focus    { background: var(--gradient-focus);    box-shadow: 0 0 6px rgba(6,182,212,0.4); }
 
 /* ── Quest card ─────────────────────────────────────────────── */
-.quest-section { grid-column: 1 / -1; }
-
-.quest-counter {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-  margin-left: auto;
-  font-weight: 500;
-}
-.quest-counter--full { color: var(--color-danger); }
-
 #quest-list {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  margin-bottom: var(--space-6);
 }
 
 .quest-card {
@@ -260,8 +190,8 @@
 .badge--legend { background: rgba(249, 115, 22, 0.15); color: var(--badge-legend); border: 1px solid rgba(249,115,22,0.3); }
 .badge--custom { background: rgba(139, 92, 246, 0.15); color: var(--badge-custom); border: 1px solid rgba(139,92,246,0.3); }
 
-.quest-desc {
-  font-size: var(--font-size-sm);
+.quest-meta {
+  font-size: var(--font-size-xs);
   color: var(--color-text-muted);
   margin-bottom: var(--space-3);
 }
@@ -270,81 +200,6 @@
   display: flex;
   gap: var(--space-2);
   flex-wrap: wrap;
-}
-
-/* Add quest form */
-.add-quest-form {
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-5);
-}
-
-.add-quest-form h3 {
-  font-size: var(--font-size-base);
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-4);
-  font-weight: 600;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
-}
-
-@media (max-width: 500px) {
-  .form-row { grid-template-columns: 1fr; }
-}
-
-/* ── Achievement card ───────────────────────────────────────── */
-.achievement-section { grid-column: 1 / -1; }
-
-#achievement-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--space-3);
-}
-
-.achievement-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-4);
-  transition: border-color var(--transition-fast), background var(--transition-fast);
-}
-
-.achievement-item--unlocked {
-  border-color: rgba(139, 92, 246, 0.3);
-  background: rgba(139, 92, 246, 0.06);
-}
-.achievement-item--unlocked:hover { background: rgba(139, 92, 246, 0.10); }
-
-.achievement-item--locked { opacity: 0.45; }
-
-.achievement-icon { font-size: 1.8rem; flex-shrink: 0; }
-
-.achievement-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.achievement-name {
-  font-weight: 700;
-  font-size: var(--font-size-sm);
-}
-
-.achievement-desc {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-}
-
-.achievement-date {
-  font-size: var(--font-size-xs);
-  color: var(--color-primary-light);
-  margin-top: 2px;
 }
 
 /* ── Footer ─────────────────────────────────────────────────── */
