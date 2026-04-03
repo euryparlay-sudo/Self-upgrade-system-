@@ -1,0 +1,243 @@
+/* =============================================================
+   style.css — Self Upgrade System (single stylesheet)
+   ============================================================= */
+
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --accent: #60a5fa;
+  --success: #34d399;
+  --danger: #ef4444;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* ── App layout ──────────────────────────────────────────────── */
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Player Info Section ─────────────────────────────────────── */
+#player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.player-header {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.player-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.exp-label {
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+}
+
+.exp-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.exp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--success));
+  transition: width 0.3s ease;
+}
+
+/* ── Stats Section ───────────────────────────────────────────── */
+#stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stats-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* ── Quests Section ──────────────────────────────────────────── */
+#quests {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quests-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.quest-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.quest-info {
+  flex: 1;
+}
+
+.quest-text {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.quest-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.quest-btn {
+  padding: 8px 16px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.quest-btn:hover:not(:disabled) {
+  background: #3b82f6;
+  transform: scale(1.05);
+}
+
+.quest-btn:disabled {
+  background: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ── Notifications ───────────────────────────────────────────── */
+#notification-area {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.notification {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: auto;
+  max-width: 300px;
+  word-break: break-word;
+}
+
+.notification--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.notification--success {
+  background: rgba(52, 211, 153, 0.85);
+}
+
+.notification--error {
+  background: rgba(239, 68, 68, 0.85);
+}
+
+.notification--level-up {
+  background: linear-gradient(135deg, #60a5fa, #34d399);
+  font-size: 14px;
+}
+
+/* ── Mobile responsive ───────────────────────────────────────── */
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .section {
+    padding: 16px;
+  }
+
+  .quest-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .quest-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
